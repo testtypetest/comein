@@ -1,0 +1,49 @@
+class Note:
+    def __init__(self, title, content):
+        self.title = title
+        self.content = content
+
+    def __str__(self):
+        return f"Заголовок: {self.title}\nСодержимое: {self.content}"
+
+class NoteManager:
+    def __init__(self):
+        self.notes = []
+
+    def add_note(self, title, content):
+        note = Note(title, content)
+        self.notes.append(note)
+
+    def remove_note_by_index(self, index):
+        if 0 <= index < len(self.notes):
+            del self.notes[index]
+
+    def view_notes(self):
+        if not self.notes:
+            print("Список заметок пуст.")
+        else:
+            print("Список заметок:")
+            for i, note in enumerate(self.notes):
+                print(f"{i + 1}. {note}")
+
+note_manager = NoteManager()
+
+while True:
+    print("Система заметок")
+    print("1. Создать заметку")
+    print("2. Удалить заметку")
+    print("3. Просмотреть заметки")
+    print("4. Выйти")
+
+    choice = input("Выберите действие: ")
+
+    if choice == "1":
+        title = input("Введите заголовок заметки: ")
+        content = input("Введите содержимое заметки: ")
+        note_manager.add_note(title, content)
+        print("Заметка успешно создана.")
+
+    elif choice == "2":
+        index = int(input("Введите индекс заметки для удаления: ")) - 1
+        note_manager.remove_note_by_index(index)
+        print("Заметка удалена
